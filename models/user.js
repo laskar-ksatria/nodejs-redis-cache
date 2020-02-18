@@ -36,16 +36,16 @@ const UserSchema = new Schema({
   password: {
     type: String,
     required: [true, 'Password cannot be empty'],
-    min:[6, 'Password must have 6 chars']
   },
   avatar: {
     type: String
   },
-  account: [{ 
+  account: { 
     type: Schema.Types.ObjectId, ref: "Account" 
-  }],
+  },
   id_country: {
-    type: String
+    type: String,
+    default: ''
   },
   date: {
     type: Date,
