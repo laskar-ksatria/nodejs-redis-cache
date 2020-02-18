@@ -37,8 +37,11 @@ class UserController {
             email
         })
         .then(function (user) {
+            console.log(user)
             if (user) {
+                console.log(user)
                 let passwordChecking = checkPass(password, user.password);
+                console.log(passwordChecking);
                 if (passwordChecking) {
                     let payload = {
                         id: user.id,
