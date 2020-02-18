@@ -38,11 +38,6 @@ const UserSchema = new mongoose.Schema({
 })
 
 
-UserSchema.pre('save', function(next) {
-  let pass = hashPass(this.password);
-  this.password = pass;
-  next();
-})
 
 const user = mongoose.model('User', UserSchema);
 
