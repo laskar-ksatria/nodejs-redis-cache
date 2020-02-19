@@ -7,7 +7,7 @@ class UserController {
     static readAll(req,res,next) {
         User.find({}).populate('account')
             .then(function (users) {
-                res.status(200).json(users)
+                res.status(200).json(users);
             })
             .catch(next);
     };
@@ -50,12 +50,13 @@ class UserController {
                     let token = generateToken(payload);
                     res.status(201).json({message: `Welcome ${user.name}, hope you have a nice day`, token, user})
                 }else {
-                    next({message: 'Invalid email / password'})
+                    next({message: 'Invalid email / password'});
                 }
             }else {
-                next({message: 'Invalid email / password'})
-            }
+                next({message: 'Invalid email / password'});
+            };
         })
+        .catch(next)
     };
 
     static updateVerification(req,res,next) {
@@ -65,10 +66,8 @@ class UserController {
                 res.status(201).json({messge: `Your account already verificated`})
             })
             .catch(next);
-    }
-
+    };
 
 };
-
 
 module.exports = UserController;
