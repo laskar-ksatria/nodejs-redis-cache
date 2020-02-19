@@ -3,7 +3,7 @@ const Web3 = require("web3");
 const web3 = new Web3(new Web3.providers.HttpProvider(process.env.INFURA));
 
 const Account = require("../models/account.js");
-const User = require("../models/User");
+const User = require("../models/user");
 
 
 module.exports = {
