@@ -16,7 +16,7 @@ const mainRoute = require('./routes');
 const errHandler = require('./middlewares/errHandler');
 
 let mongoUri = process.env.MONGO_URI
-mongoose.connect(mongoUri, {useNewUrlParser: true});
+mongoose.connect('mongodb://localhost/test45', {useNewUrlParser: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -26,6 +26,7 @@ db.once('open', function() {
 
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
+app.use(express.json())
 app.use(mainRoute);
 app.use(errHandler);
 

@@ -33,15 +33,41 @@ const UserSchema = new mongoose.Schema({
     },
   password: {
     type: String,
-    required:[true, 'Password cannot be empty']
+    required:[true, 'Password cannot be empty'],
+    min: [6, 'Password must 6 or more characters']
+  },
+  avatar: {
+    type: String,
+    default: ''
+  },
+  account: { 
+    type: mongoose.Schema.Types.ObjectId, ref: "Account",
+    default: null 
+  },
+  id_country: {
+    type: String,
+    default: ''
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  },
+  verification: {
+      type: Boolean,
+      default: false
   }
 })
 
 
+UserSchema.pre('save', function (next) {
+  let pass = hashPass(this.password);
+  this.password = pass;
+  next();
+})
 
-const user = mongoose.model('User', UserSchema);
 
-module.exports = user;
+global.UserSchema = global.UserSchema || mongoose.model('User', UserSchema);
+module.exports = global.UserSchema;
 
 
 
