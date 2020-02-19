@@ -16,7 +16,7 @@ const mainRoute = require('./routes');
 const errHandler = require('./middlewares/errHandler');
 
 let mongoUri = process.env.MONGO_URI
-mongoose.connect('mongodb://localhost/test45', {useNewUrlParser: true});
+mongoose.connect(mongoUri, {useNewUrlParser: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
