@@ -36,6 +36,7 @@ class UserController {
 
     static login(req,res,next) {
         let { email, password } = req.body;
+        
         User.findOne({
             email
         })
@@ -47,7 +48,7 @@ class UserController {
                         email: user.email,
                     }
                     let token = generateToken(payload);
-                    res.status(201).json({message: `Welcome ${user.name}, hope you have a nice day`, token})
+                    res.status(201).json({message: `Welcome ${user.name}, hope you have a nice day`, token, user})
                 }else {
                     next({message: 'Invalid email / password'})
                 }
