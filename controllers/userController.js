@@ -12,9 +12,18 @@ class UserController {
             .catch(next);
     };
 
+    static readMe(req,res,next) {
+        let userId = req.decoded.id;
+        User.findOne({_id: userId})
+            .then(function (user) {
+                res.status(200).json(user);
+            })
+            .catch(next);
+    };
+
     static create(req,res,next) {
         let { name, email, password, confirm_password } = req.body;
-
+        console.log(req.body)
        if (password.length < 6) {
            next({message: 'Password must 6 or more characters'})
        };
@@ -36,7 +45,6 @@ class UserController {
 
     static login(req,res,next) {
         let { email, password } = req.body;
-        
         User.findOne({
             email
         })
