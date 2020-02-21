@@ -3,10 +3,13 @@ const Router = express.Router();
 const { authentification } = require('../middlewares/tokenChecking');
 
 // Require the controllers
-const newAccount = require("../controllers/accountController");
+const AccountController = require('../controllers/accountController');
 
 // create a new accounts
-Router.post("/newAccount",authentification,newAccount.new_account);
+Router.post("/newAccount",authentification,AccountController.create);
+Router.get('/eth', authentification,AccountController.readMyEth);
+Router.get('/', AccountController.readAll);
+Router.get('/myAccount', authentification,AccountController.readMe);
 
 
 module.exports = Router;

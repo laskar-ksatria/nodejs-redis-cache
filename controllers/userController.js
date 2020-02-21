@@ -23,7 +23,7 @@ class UserController {
 
     static create(req,res,next) {
         let { name, email, password, confirm_password } = req.body;
-        console.log(req.body)
+        
        if (password.length < 6) {
            next({message: 'Password must 6 or more characters'})
        };
