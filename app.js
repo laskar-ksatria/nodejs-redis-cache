@@ -14,8 +14,8 @@ const mainRoute = require('./routes');
 
 //errHandler
 const errHandler = require('./middlewares/errHandler');
-let mongoUri = 'mongodb://localhost/test12';
-// let mongoUri = process.env.MONGO_URI;
+// let mongoUri = 'mongodb://localhost/test12';
+let mongoUri = process.env.MONGO_URI;
 mongoose.connect(mongoUri, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
