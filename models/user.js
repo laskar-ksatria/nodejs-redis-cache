@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const { hashPass } = require('../helpers/hashPassword');
 
 const UserSchema = new mongoose.Schema({
@@ -42,7 +41,6 @@ const UserSchema = new mongoose.Schema({
   },
   account: { 
     type: mongoose.Schema.Types.ObjectId, ref: "Account",
-    default: null 
   },
   id_country: {
     type: String,

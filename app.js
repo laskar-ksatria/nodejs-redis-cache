@@ -6,7 +6,7 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 
 
 //Router
@@ -14,13 +14,13 @@ const mainRoute = require('./routes');
 
 //errHandler
 const errHandler = require('./middlewares/errHandler');
-
-let mongoUri = process.env.MONGO_URI
-mongoose.connect(mongoUri, {useNewUrlParser: true});
+let mongoUri = 'mongodb://localhost/test12';
+// let mongoUri = process.env.MONGO_URI;
+mongoose.connect(mongoUri, {useNewUrlParser: true, useUnifiedTopology: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
-  console.log(`Welcome to mongoDb`)
+  console.log(`Welcome to mongoDb`);
 });
 
 
@@ -31,6 +31,6 @@ app.use(mainRoute);
 app.use(errHandler);
 
 
-app.listen(PORT, () => console.log(`Server started on ${PORT}`))
+app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 
 

@@ -14,7 +14,7 @@ class UserController {
 
     static readMe(req,res,next) {
         let userId = req.decoded.id;
-        User.findOne({_id: userId})
+        User.findOne({_id: userId}).populate('account')
             .then(function (user) {
                 res.status(200).json(user);
             })
@@ -23,13 +23,8 @@ class UserController {
 
     static create(req,res,next) {
         let { name, email, password, confirm_password } = req.body;
-        
-       if (password.length < 6) {
-           next({message: 'Password must 6 or more characters'})
-       };
-
-        if (confirm_password !== password) {
-            next({message: "Confirm Password doesn't match with passowrd"})
+        if (confirm_password != password) {
+            return next({message: "Confirm Password doesn't match with password"})
         }else {
             User.create({
                 name,
@@ -37,7 +32,7 @@ class UserController {
                 password
             })
             .then(function(user) {
-                res.status(202).json(user)
+                res.status(202).json({message: `Thank you for registering ${name}, please verify your email first`})
             })
             .catch(next);
         };
